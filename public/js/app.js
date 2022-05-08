@@ -7,7 +7,73 @@
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+(function () {
+  'use strict'; // laod jquery
+
+  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // flowbyte component
+
+  window.APPOINTMENT = {
+    global: {},
+    officer: {}
+  };
+})();
+
+/***/ }),
+
+/***/ "./resources/js/init.js":
+/*!******************************!*\
+  !*** ./resources/js/init.js ***!
+  \******************************/
+/***/ (() => {
+
+(function () {
+  'use strict';
+
+  $(document).ready(function () {
+    // switch pages
+    switch ($('body').data('page-id')) {
+      case 'officer':
+        APPOINTMENT.officer.insertOfficerDetail();
+        break;
+
+      default: // nothing
+
+    }
+  });
+})();
+
+/***/ }),
+
+/***/ "./resources/js/officer.js":
+/*!*********************************!*\
+  !*** ./resources/js/officer.js ***!
+  \*********************************/
+/***/ (() => {
+
+/**
+ * methods for inserting officer details 
+ */
+APPOINTMENT.officer.insertOfficerDetail = function () {
+  $('#add_officer_form').on('submit', function (event) {
+    var formData = new FormData(this);
+    $.ajax({
+      type: 'POST',
+      url: '/officer',
+      data: formData,
+      success: function success(data) {
+        alert(data);
+      },
+      error: function error(request, _error) {
+        var errors = jQuery.parseJSON(request.responseText);
+        $.each(errors, function (key, value) {
+          $("#add_officer_form > .form-group > small[name=" + key + "]").text(value);
+          $("#add_officer_form > .form-group > small[name=" + key + "]").addClass('text-red-500 visible');
+        });
+      }
+    });
+    event.preventDefault();
+  });
+};
 
 /***/ }),
 
@@ -11067,6 +11133,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/officer.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/init.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);

@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\OfficerController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/officer', [OfficerController::class, 'index'])->name('officer_index');
+
+Route::post('/officer', [OfficerController::class, 'store'])->name('officer_insert');
