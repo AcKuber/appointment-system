@@ -34,6 +34,7 @@
     switch ($('body').data('page-id')) {
       case 'officer':
         APPOINTMENT.officer.insertOfficerDetail();
+        APPOINTMENT.officer.toggleOfficerStatus();
         break;
 
       default: // nothing
@@ -88,6 +89,30 @@ APPOINTMENT.officer.insertOfficerDetail = function () {
       error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
       }
     });
+  });
+};
+
+APPOINTMENT.officer.toggleOfficerStatus = function () {
+  $('.toggler').on('click', function (event) {
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var token = $(".toggle_status > input[type='hidden'").val();
+    $.ajax({
+      type: 'POST',
+      url: '/toggleOfficerStatus',
+      data: {
+        _token: token,
+        id: id,
+        status: status
+      },
+      success: function success(data, status, xhr) {
+        if (data.success) location.reload();
+      },
+      error: function error(request, _error2) {
+        alert("Somting went wrong. Try again!");
+      }
+    });
+    event.preventDefault();
   });
 };
 

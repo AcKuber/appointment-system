@@ -46,4 +46,37 @@ APPOINTMENT.officer.insertOfficerDetail = function() {
 
         });
     });
+
+}
+
+APPOINTMENT.officer.toggleOfficerStatus = function() {
+    $('.toggler').on('click', function(event) {
+        const id = $(this).data('id');
+        const status = $(this).data('status');
+        const token = $(".toggle_status > input[type='hidden'").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/toggleOfficerStatus',
+            data: {
+                _token: token,
+                id: id,
+                status: status
+            },
+
+            success: function(data, status, xhr) {
+                 if(data.success) 
+                     location.reload();
+
+            },
+
+            error: function(request, error) {
+                alert("Somting went wrong. Try again!");
+            }
+
+        });
+
+
+        event.preventDefault();
+    });
 }

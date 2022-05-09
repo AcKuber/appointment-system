@@ -70,4 +70,16 @@ class OfficerController extends Controller
 
         return response()->json(['success' => 'Data inserted successfully.']);
     }
+
+    public function toggleStatus(Request $request) {
+
+        if($request->status == "Active" || $request->status == "Inactive") {
+            $obj = Officer::findOrFail($request->id);
+
+            $obj->ostatus = ($request->status == "Active") ? "Inactive": "Active";
+            $obj->save();
+            return response()->json(['success' => 'Toggled successfully']);   
+        }
+        return null;     
+    }
 }

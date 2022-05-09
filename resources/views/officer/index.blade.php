@@ -100,15 +100,22 @@
 					<td class="px-6 py-4">{{ $counter }}</td>
 					<td class="px-6 py-4">{{ $value->oname }}</td>
 					<td class="px-6 py-4">{{ $value->post }}</td>
-					<td class="px-6 py-4">
-					{{$value->ostatus}} 
-						@if($value->ostatus == "Active")
-							<button class="m-2 p-2 bg-red-500 text-white rounded">Inactive</button>
-						@endif
+					<td class="px-6 py-4"> 
+						<form action="{{ url('/toggleOfficerStatus') }}" method="POST" class="toggle_status">
+							@csrf
+							<button
+								class="
+								toggler
+								@php
+									echo ($value->ostatus == 'Active')?"m-2 p-2 bg-green-500 text-white rounded":"m-2 p-2 bg-red-500 text-white rounded";
+								@endphp
+								"
+								data-id="{{$value->id}}" data-status="{{$value->ostatus}}"
+							>
+								{{$value->ostatus}}
+							</button>
+						</form>
 
-						@if($value->ostatus == "Inactive")
-							<button class="m-2 p-2 bg-green-500 text-white rounded">Active</button>
-						@endif
 					 </td>
 					<td class="px-6 py-4"> {{ $value->workStartTime }} </td>
 					<td class="px-6 py-4"> {{ $value->workEndTime }} </td>

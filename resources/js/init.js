@@ -7,6 +7,7 @@
       switch($('body').data('page-id')) {
         case 'officer':
           APPOINTMENT.officer.insertOfficerDetail();
+          APPOINTMENT.officer.toggleOfficerStatus();
         break;
         default:
           // nothing
