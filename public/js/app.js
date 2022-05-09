@@ -80,7 +80,10 @@ APPOINTMENT.officer.insertOfficerDetail = function () {
               $("#add_officer_form > div > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
             }
           });
-        } else {}
+        } else {
+          alert(data.success);
+          location.reload();
+        }
       },
       error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
       }

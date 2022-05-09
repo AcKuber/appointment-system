@@ -9,7 +9,10 @@ use App\Models\Officer;
 class OfficerController extends Controller
 {
     public function index() {
-        return view('officer.index');
+        $data = Officer::get();
+        return view('officer.index', [
+            'data' => $data
+        ]);
     }
 
     public function store(Request $request) {

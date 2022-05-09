@@ -6,11 +6,11 @@
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<title>Officer-> Home page</title>
 </head>
-<body data-page-id="officer" class="h-screen w-screen flex items-center justify-center">
+<body data-page-id="officer" class="h-screen w-screen">
 	
 
 <button 
-	class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="add_officer">
+	class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto mr-auto mt-10" type="button" data-modal-toggle="add_officer">
 	Add Officer
 </button>
 
@@ -74,6 +74,55 @@
 		</div>
 	</div>
 	</div>
+</div>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+	<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+		<thead>
+			<tr>
+				<th scope="col" class="px-6 py-3">S.N</th>
+				<th scope="col" class="px-6 py-3">Officer Name</th>
+				<th scope="col" class="px-6 py-3">Post</th>
+				<th scope="col" class="px-6 py-3">Status</th>
+				<th scope="col" class="px-6 py-3">Work Start Time</th>
+				<th scope="col" class="px-6 py-3">Work End Time</th>
+				<th scope="col" class="px-6 py-3">Action</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@php
+	    		$counter = 1;
+			@endphp
+
+			@foreach($data as $value) 
+				<tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
+					<td class="px-6 py-4">{{ $counter }}</td>
+					<td class="px-6 py-4">{{ $value->oname }}</td>
+					<td class="px-6 py-4">{{ $value->post }}</td>
+					<td class="px-6 py-4">
+					{{$value->ostatus}} 
+						@if($value->ostatus == "Active")
+							<button class="m-2 p-2 bg-red-500 text-white rounded">Inactive</button>
+						@endif
+
+						@if($value->ostatus == "Inactive")
+							<button class="m-2 p-2 bg-green-500 text-white rounded">Active</button>
+						@endif
+					 </td>
+					<td class="px-6 py-4"> {{ $value->workStartTime }} </td>
+					<td class="px-6 py-4"> {{ $value->workEndTime }} </td>
+					<td>
+						<button class="m-2 p-2 bg-blue-500 text-white rounded">UPDATE</button>
+						<button class="m-2 p-2 bg-yellow-400 text-white rounded">Appointments</button>
+					</td>
+				</tr>
+				@php
+	    			$counter++;
+				@endphp
+			@endforeach
+		</tbody>
+	</table>
 </div>
 
 

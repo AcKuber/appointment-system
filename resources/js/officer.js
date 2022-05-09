@@ -35,7 +35,8 @@ APPOINTMENT.officer.insertOfficerDetail = function() {
                         }
                     });
                 } else {
-
+                    alert(data.success);
+                    location.reload();
                 }
             },
 
