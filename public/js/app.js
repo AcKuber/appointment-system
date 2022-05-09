@@ -55,23 +55,36 @@
  */
 APPOINTMENT.officer.insertOfficerDetail = function () {
   $('#add_officer_form').on('submit', function (event) {
+    event.preventDefault();
     var formData = new FormData(this);
+    $("#add_officer_form > div > small").text("");
+    $("#add_officer_form > div > small").addClass('hidden');
+    $("#add_officer_form > div > div > small").text("");
+    $("#add_officer_form > div > div > small").addClass('hidden');
     $.ajax({
       type: 'POST',
       url: '/officer',
       data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
       success: function success(data) {
-        alert(data);
+        if (data.status === 'error') {
+          $.each(data.errors, function (key, value) {
+            $("#add_officer_form > div > small[name=" + key + "]").text(value);
+            console.log(key + ": " + value);
+            $("#add_officer_form > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+
+            if (key === 'start_time' || key === 'end_time') {
+              $("#add_officer_form > div > div > small[name=" + key + "]").text(value);
+              $("#add_officer_form > div > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+            }
+          });
+        } else {}
       },
-      error: function error(request, _error) {
-        var errors = jQuery.parseJSON(request.responseText);
-        $.each(errors, function (key, value) {
-          $("#add_officer_form > .form-group > small[name=" + key + "]").text(value);
-          $("#add_officer_form > .form-group > small[name=" + key + "]").addClass('text-red-500 visible');
-        });
+      error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
       }
     });
-    event.preventDefault();
   });
 };
 

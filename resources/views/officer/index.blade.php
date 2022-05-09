@@ -42,15 +42,26 @@
 				<input type="text" name="post" id="post" placeholder="Your Post" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 				<small name="post" class="bottom-0 left-0 hidden"></small>
 			</div>
+
+			<div>
+				<label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Status</label>
+				<select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+					<option value="Active">Active</option>
+					<option value="Inactive">Inactive</option>
+				</select>
+				<small name="status" class="bottom-0 left-0 hidden"></small>
+			</div>
+
+
 			<div class="flex">
 				<div>
-					<label for="start_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Time</label>
+					<label for="start_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Work Start Time</label>
 					<input type="time" name="start_time" id="start_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 					<small name="start_time" class="bottom-0 left-0 hidden"></small>
 				</div>
 
 				<div class="mx-3">
-					<label for="end_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">End Time</label>
+					<label for="end_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Work End Time</label>
 					<input type="time" name="end_time" id="end_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 					<small name="end_time" class="bottom-0 left-0 hidden"></small>
 				</div>

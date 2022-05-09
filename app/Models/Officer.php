@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Officer extends Model
 {
     use HasFactory;
+
+     protected $table = 'officer';
+
+     protected $fillable = [
+        'oname',
+        'post',
+        'ostatus',
+        'workStartTime',
+        'workEndTime'
+     ];
+
+     public $timestamps = false;
 }
