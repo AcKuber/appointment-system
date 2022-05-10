@@ -60,4 +60,43 @@ class VisitorController extends Controller
         }
         return null;     
     }
+
+    public function edit(Request $request) {
+        $validator = \Validator::make($request->all(), [
+            'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+            'mobile' => 'required|digits:10',
+            'email' => 'required|email'
+        ]);
+
+        $clientErrors = array();
+
+        if($validator->fails()) {
+            $errors = $validator->errors()->getMessages();  
+            foreach ($errors as $key => $value) {
+                $clientErrors[$key] = $value[0];
+            }
+
+            $response = array(
+                'status' => 'error',
+                'errors' => $clientErrors
+            );
+
+            return response()->json($response);
+        }
+
+        $visitor = Visitor::findOrFail($request->id);
+        $visitor->vname = $request->name;
+        $visitor->mobile_no = $request->mobile;
+        $visitor->email = $request->email;
+
+        $visitor->save();
+        return response()->json(['success' => 'Data updated successfully.']);
+
+    }
+
+    public function getDetail(Request $request) {
+        $visitor = Visitor::select('id', 'vname as name', 'mobile_no as mobile', 'email')->findOrFail($request->id);
+
+        return response()->json($visitor);
+    }
 }

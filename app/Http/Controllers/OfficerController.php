@@ -145,7 +145,7 @@ class OfficerController extends Controller
     }
 
     public function getDetail(Request $request) {
-        $officer = Officer::select('id', 'oname as name', 'post', 'ostatus', 'workStartTime', 'workEndTime')->findOrFail($request->id);
+        $officer = Officer::select('id', 'oname as name', 'post', 'workStartTime', 'workEndTime')->findOrFail($request->id);
         $workDays = WorkDays::where('officer_id', $request->id)->get();
 
         return response()->json([

@@ -38,4 +38,8 @@ Route::post('/toggleOfficerStatus', [OfficerController::class, 'toggleStatus'])-
 Route::get('/visitor', [VisitorController::class, 'index'])->name('visitor_index');
 Route::post('/visitor', [VisitorController::class, 'store'])->name('visitor_insert');
 
+Route::post('/editVisitor', [VisitorController::class, 'edit'])->name('update_visitor');
+
+Route::post('/getVisitorDetailByID', [VisitorController::class, 'getDetail'])->name('visitor_detail');
+
 Route::post('/toggleVisitorStatus', [VisitorController::class, 'toggleStatus'])->name('toggle_visitor_status');

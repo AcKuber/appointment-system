@@ -39,8 +39,9 @@
         break;
 
       case 'visitor':
-        APPOINTMENT.officer.insertVisitorDetail();
-        APPOINTMENT.officer.toggleVisitorStatus();
+        APPOINTMENT.visitor.insertVisitorDetail();
+        APPOINTMENT.visitor.toggleVisitorStatus();
+        APPOINTMENT.visitor.editVisitor();
         break;
 
       default: // nothing
@@ -200,7 +201,7 @@ function getOfficerDetailByID(id, token) {
   \*********************************/
 /***/ (() => {
 
-APPOINTMENT.officer.insertVisitorDetail = function () {
+APPOINTMENT.visitor.insertVisitorDetail = function () {
   $('#add_visitor_form').on('submit', function (event) {
     event.preventDefault();
     var formData = new FormData(this);
@@ -232,7 +233,7 @@ APPOINTMENT.officer.insertVisitorDetail = function () {
     });
   });
 
-  APPOINTMENT.officer.toggleVisitorStatus = function () {
+  APPOINTMENT.visitor.toggleVisitorStatus = function () {
     $('.toggler').on('click', function (event) {
       var id = $(this).data('id');
       var status = $(this).data('status');
@@ -256,6 +257,64 @@ APPOINTMENT.officer.insertVisitorDetail = function () {
     });
   };
 };
+
+APPOINTMENT.visitor.editVisitor = function () {
+  $('.update_visitor_btn').on('click', function (event) {
+    var id = $(this).data('id');
+    var token = $(this).data('token'); // fill model with detail of current officer
+
+    getVisitorDetailByID(id, token);
+  });
+  $('#update_visitor_form').on('submit', function (event) {
+    var formData = new FormData(this);
+    $("#update_visitor_form > div > small").text("");
+    $("#update_visitor_form > div > small").addClass('hidden');
+    $("#update_visitor_form > div > div > small").text("");
+    $("#update_visitor_form > div > div > small").addClass('hidden');
+    $.ajax({
+      type: 'POST',
+      url: '/editVisitor',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(data) {
+        if (data.status === 'error') {
+          $.each(data.errors, function (key, value) {
+            $("#update_visitor_form > div > small[name=" + key + "]").text(value);
+            $("#update_visitor_form > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+          });
+        } else {
+          alert(data.success);
+          location.reload();
+        }
+      },
+      error: function error(request, _error3) {//let errors = jQuery.parseJSON(request.responseText);
+      }
+    });
+    event.preventDefault();
+  });
+};
+
+function getVisitorDetailByID(id, token) {
+  $.ajax({
+    type: 'POST',
+    url: '/getVisitorDetailByID',
+    data: {
+      _token: token,
+      id: id
+    },
+    success: function success(data, status, xhr) {
+      $.each(data, function (key, value) {
+        $("#update_visitor_form > div > input[name=" + key + "]").val(value);
+      });
+      $("#update_visitor_form").append("<input type='hidden' name='id' value='" + id + "'>");
+    },
+    error: function error(request, _error4) {
+      alert("Somting went wrong! Try again!");
+    }
+  });
+}
 
 /***/ }),
 

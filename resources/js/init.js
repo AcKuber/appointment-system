@@ -11,8 +11,9 @@
           APPOINTMENT.officer.editOfficer();
         break;
         case 'visitor':
-          APPOINTMENT.officer.insertVisitorDetail();
-          APPOINTMENT.officer.toggleVisitorStatus();
+          APPOINTMENT.visitor.insertVisitorDetail();
+          APPOINTMENT.visitor.toggleVisitorStatus();
+          APPOINTMENT.visitor.editVisitor();
         break;
         default:
           // nothing
