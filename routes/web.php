@@ -24,5 +24,9 @@ Route::get('/officer', [OfficerController::class, 'index'])->name('officer_index
 
 Route::post('/officer', [OfficerController::class, 'store'])->name('officer_insert');
 
+Route::post('/editOfficer', [OfficerController::class, 'edit'])->name('update_officer');
+
+Route::post('/getOfficerDetailByID', [OfficerController::class, 'getDetail'])->name('officer_detail');
+
 
 Route::post('/toggleOfficerStatus', [OfficerController::class, 'toggleStatus'])->name('toggle_officer_status');

@@ -35,6 +35,7 @@
       case 'officer':
         APPOINTMENT.officer.insertOfficerDetail();
         APPOINTMENT.officer.toggleOfficerStatus();
+        APPOINTMENT.officer.editOfficer();
         break;
 
       default: // nothing
@@ -52,7 +53,7 @@
 /***/ (() => {
 
 /**
- * methods for inserting officer details 
+ * Method for inserting officer details 
  */
 APPOINTMENT.officer.insertOfficerDetail = function () {
   $('#add_officer_form').on('submit', function (event) {
@@ -115,6 +116,81 @@ APPOINTMENT.officer.toggleOfficerStatus = function () {
     event.preventDefault();
   });
 };
+
+APPOINTMENT.officer.editOfficer = function () {
+  $('.update_officer_btn').on('click', function (event) {
+    var id = $(this).data('id');
+    var token = $(this).data('token'); // fill model with detail of current officer
+
+    getOfficerDetailByID(id, token);
+  });
+  $('#update_officer_form').on('submit', function (event) {
+    var formData = new FormData(this);
+    $("#update_officer_form > div > small").text("");
+    $("#update_officer_form > div > small").addClass('hidden');
+    $("#update_officer_form > div > div > small").text("");
+    $("#update_officer_form > div > div > small").addClass('hidden');
+    $.ajax({
+      type: 'POST',
+      url: '/editOfficer',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(data) {
+        if (data.status === 'error') {
+          $.each(data.errors, function (key, value) {
+            $("#update_officer_form > div > small[name=" + key + "]").text(value);
+            $("#update_officer_form > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+
+            if (key === 'workStartTime' || key === 'workEndTime') {
+              $("#update_officer_form > div > div > small[name=" + key + "]").text(value);
+              $("#update_officer_form > div > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+            }
+          });
+        } else {
+          alert(data.success);
+          location.reload();
+        }
+      },
+      error: function error(request, _error3) {//let errors = jQuery.parseJSON(request.responseText);
+      }
+    });
+    event.preventDefault();
+  });
+};
+
+function getOfficerDetailByID(id, token) {
+  $.ajax({
+    type: 'POST',
+    url: '/getOfficerDetailByID',
+    data: {
+      _token: token,
+      id: id
+    },
+    success: function success(data, status, xhr) {
+      $.each(data.officer, function (key, value) {
+        $("#update_officer_form > div > input[name=" + key + "]").val(value);
+
+        if (key === 'ostatus') {
+          $("#update_officer_form > div > select > option[selected]").removeAttr('selected');
+          $("#update_officer_form > div > select > option[value='" + value + "'").attr('selected', 'selected');
+        }
+
+        if (key === 'workStartTime' || key === 'workEndTime') {
+          $("#update_officer_form > div > div > input[name=" + key + "]").val(value.slice(0, -3));
+        }
+      });
+      $.each(data.workDays, function (key, value) {
+        $("#update_officer_form > div > input[value='" + value.DAYOFWEEK + "'").attr('checked', true);
+      });
+      $("#update_officer_form").append("<input type='hidden' name='id' value='" + id + "'>");
+    },
+    error: function error(request, _error4) {
+      alert("Somting went wrong! Try again!");
+    }
+  });
+}
 
 /***/ }),
 

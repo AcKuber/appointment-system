@@ -8,6 +8,7 @@
         case 'officer':
           APPOINTMENT.officer.insertOfficerDetail();
           APPOINTMENT.officer.toggleOfficerStatus();
+          APPOINTMENT.officer.editOfficer();
         break;
         default:
           // nothing

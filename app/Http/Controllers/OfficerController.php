@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Models\Officer;
+use App\Models\WorkDays;
 
 class OfficerController extends Controller
 {
@@ -16,20 +17,13 @@ class OfficerController extends Controller
     }
 
     public function store(Request $request) {
-        /*$this->validate($request, [
-            'name' => 'required|alpha',
-            'post' => 'required|alpha',
-            'status' => 'required',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|gt:start_time'
-        ]);*/
-
         $validator = \Validator::make($request->all(), [
             'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
             'post' => 'required|alpha',
             'status' => 'required',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i'
+            'end_time' => 'required|date_format:H:i',
+            'days' => 'required'
         ]);
 
         $clientErrors = array();
@@ -60,13 +54,20 @@ class OfficerController extends Controller
         }
 
         // now insert into database+
-        Officer::create([
+        $officer = Officer::create([
            'oname' => $request->name,
            'post' => $request->post,
            'ostatus' => $request->status,
            'workStartTime' => $request->start_time,
            'workEndTime' => $request->end_time 
         ]);
+
+        foreach($request->days as $key=>$name) {
+                $obj1 = new WorkDays();
+                $obj1->officer_id = $officer->id;
+                $obj1->dayofweek = $name;
+                $obj1->save();
+        }
 
         return response()->json(['success' => 'Data inserted successfully.']);
     }
@@ -81,5 +82,77 @@ class OfficerController extends Controller
             return response()->json(['success' => 'Toggled successfully']);   
         }
         return null;     
+    }
+
+    public function edit(Request $request) {
+
+        $validator = \Validator::make($request->all(), [
+            'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+            'post' => 'required|alpha',
+            'status' => 'required',
+            'workStartTime' => 'required|date_format:H:i',
+            'workEndTime' => 'required|date_format:H:i',
+            'days' => 'required'
+        ]);
+
+        $clientErrors = array();
+
+        if($validator->fails()) {
+            $errors = $validator->errors()->getMessages();  
+            foreach ($errors as $key => $value) {
+                $clientErrors[$key] = $value[0];
+            }
+
+            $response = array(
+                'status' => 'error',
+                'errors' => $clientErrors
+            );
+
+            return response()->json($response);
+        }
+
+
+
+        if(strtotime($request->workStartTime) >= strtotime($request->workEndTime)) {
+               //if(! Arr::exists($clientErrors, 'start_time')) 
+                $clientErrors['workStartTime'] = 'Start time must be smaller than end time';
+
+                $response = array(
+                    'status' => 'error',
+                    'errors' => $clientErrors
+                );
+                return response()->json($response);
+        }
+
+        $officer = Officer::findOrFail($request->id);
+
+        $officer->oname = $request->name;
+        $officer->post = $request->post;
+        $officer->ostatus = $request->status;
+        $officer->workStartTime = $request->workStartTime;
+        $officer->workEndTime = $request->workEndTime;
+
+
+         WorkDays::where('officer_id', $request->id)->delete();
+
+         foreach($request->days as $key=>$name) {
+                $workDay = new WorkDays();
+                $workDay->officer_id = $request->id;
+                $workDay->dayofweek = $name;
+                $workDay->save();
+        }
+        $officer->save();
+
+        return response()->json(['success' => 'Data updated successfully.']); 
+    }
+
+    public function getDetail(Request $request) {
+        $officer = Officer::select('id', 'oname as name', 'post', 'ostatus', 'workStartTime', 'workEndTime')->findOrFail($request->id);
+        $workDays = WorkDays::where('officer_id', $request->id)->get();
+
+        return response()->json([
+            'officer' => $officer,
+            'workDays' => $workDays
+        ]);
     }
 }
