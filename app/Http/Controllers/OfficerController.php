@@ -89,7 +89,6 @@ class OfficerController extends Controller
         $validator = \Validator::make($request->all(), [
             'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
             'post' => 'required|alpha',
-            'status' => 'required',
             'workStartTime' => 'required|date_format:H:i',
             'workEndTime' => 'required|date_format:H:i',
             'days' => 'required'
@@ -128,7 +127,6 @@ class OfficerController extends Controller
 
         $officer->oname = $request->name;
         $officer->post = $request->post;
-        $officer->ostatus = $request->status;
         $officer->workStartTime = $request->workStartTime;
         $officer->workEndTime = $request->workEndTime;
 

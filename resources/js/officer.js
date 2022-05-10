@@ -148,11 +148,6 @@ function getOfficerDetailByID(id, token) {
             $.each(data.officer, function(key, value) {
                 $("#update_officer_form > div > input[name="+key+"]").val(value);
 
-                if(key === 'ostatus') {
-                    $("#update_officer_form > div > select > option[selected]").removeAttr('selected');
-                    $("#update_officer_form > div > select > option[value='"+value+"'").attr('selected', 'selected');
-                }
-
                 if(key === 'workStartTime' || key === 'workEndTime') {
                     $("#update_officer_form > div > div > input[name="+key+"]").val(value.slice(0, -3));
                 }
