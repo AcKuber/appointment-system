@@ -10,11 +10,11 @@
 (function () {
   'use strict'; // laod jquery
 
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // flowbyte component
-
+  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
   window.APPOINTMENT = {
     global: {},
-    officer: {}
+    officer: {},
+    visitor: {}
   };
 })();
 
@@ -36,6 +36,11 @@
         APPOINTMENT.officer.insertOfficerDetail();
         APPOINTMENT.officer.toggleOfficerStatus();
         APPOINTMENT.officer.editOfficer();
+        break;
+
+      case 'visitor':
+        APPOINTMENT.officer.insertVisitorDetail();
+        APPOINTMENT.officer.toggleVisitorStatus();
         break;
 
       default: // nothing
@@ -186,6 +191,71 @@ function getOfficerDetailByID(id, token) {
     }
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/visitor.js":
+/*!*********************************!*\
+  !*** ./resources/js/visitor.js ***!
+  \*********************************/
+/***/ (() => {
+
+APPOINTMENT.officer.insertVisitorDetail = function () {
+  $('#add_visitor_form').on('submit', function (event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    $("#add_visitor_form > div > small").text("");
+    $("#add_visitor_form > div > small").addClass('hidden');
+    $("#add_visitor_form > div > div > small").text("");
+    $("#add_visitor_form > div > div > small").addClass('hidden');
+    $.ajax({
+      type: 'POST',
+      url: '/visitor',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(data) {
+        if (data.status === 'error') {
+          $.each(data.errors, function (key, value) {
+            $("#add_visitor_form > div > small[name=" + key + "]").text(value);
+            console.log(key + ": " + value);
+            $("#add_visitor_form > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+          });
+        } else {
+          alert(data.success);
+          location.reload();
+        }
+      },
+      error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
+      }
+    });
+  });
+
+  APPOINTMENT.officer.toggleVisitorStatus = function () {
+    $('.toggler').on('click', function (event) {
+      var id = $(this).data('id');
+      var status = $(this).data('status');
+      var token = $(".toggle_status > input[type='hidden'").val();
+      $.ajax({
+        type: 'POST',
+        url: '/toggleVisitorStatus',
+        data: {
+          _token: token,
+          id: id,
+          status: status
+        },
+        success: function success(data, status, xhr) {
+          if (data.success) location.reload();
+        },
+        error: function error(request, _error2) {
+          alert("Somting went wrong. Try again!");
+        }
+      });
+      event.preventDefault();
+    });
+  };
+};
 
 /***/ }),
 
@@ -11246,6 +11316,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/officer.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/visitor.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/init.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))

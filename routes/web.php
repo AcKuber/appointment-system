@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\VisitorController;
 
 
 Route::get('/', function () {
@@ -30,3 +31,11 @@ Route::post('/getOfficerDetailByID', [OfficerController::class, 'getDetail'])->n
 
 
 Route::post('/toggleOfficerStatus', [OfficerController::class, 'toggleStatus'])->name('toggle_officer_status');
+
+
+
+// visitor related routes
+Route::get('/visitor', [VisitorController::class, 'index'])->name('visitor_index');
+Route::post('/visitor', [VisitorController::class, 'store'])->name('visitor_insert');
+
+Route::post('/toggleVisitorStatus', [VisitorController::class, 'toggleStatus'])->name('toggle_visitor_status');

@@ -10,6 +10,10 @@
           APPOINTMENT.officer.toggleOfficerStatus();
           APPOINTMENT.officer.editOfficer();
         break;
+        case 'visitor':
+          APPOINTMENT.officer.insertVisitorDetail();
+          APPOINTMENT.officer.toggleVisitorStatus();
+        break;
         default:
           // nothing
       }
