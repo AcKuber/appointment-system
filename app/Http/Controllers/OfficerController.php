@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Models\Officer;
 use App\Models\WorkDays;
+use App\Models\Activity;
 
 class OfficerController extends Controller
 {
@@ -74,13 +75,30 @@ class OfficerController extends Controller
 
     public function toggleStatus(Request $request) {
 
-        if($request->status == "Active" || $request->status == "Inactive") {
+        if($request->status == "Active") {
             $obj = Officer::findOrFail($request->id);
 
             $obj->ostatus = ($request->status == "Active") ? "Inactive": "Active";
             $obj->save();
+
+            Activity::where('officer_id', '=', $request->id)->update([
+                'astatus' => 'Deactivated'
+            ]);
+
             return response()->json(['success' => 'Toggled successfully']);   
+        } else if($request->status == "Inactive") {
+            $obj = Officer::findOrFail($request->id);
+
+            $obj->ostatus = ($request->status == "Active") ? "Inactive": "Active";
+            $obj->save();
+
+            Activity::where('officer_id', '=', $request->id)->update([
+                'astatus' => 'Active'
+            ]);
+
+            return response()->json(['success' => 'Toggled successfully']);
         }
+
         return null;     
     }
 

@@ -269,6 +269,20 @@ class ActivityController extends Controller
     }
 
     public function filterBasedOnType(Request $request) {
+        if($request->atype === "all") {
+            $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
+            ->leftjoin('officer','activity.officer_id','=','officer.id')
+            ->leftjoin('visitor','activity.visitor_id','=','visitor.id')
+            ->orderBy('adate', 'DESC')
+            ->get()->all();
+
+         
+            return response()->json([
+                'activity' => $activity
+            ]);   
+        }
+
+
         $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
             ->leftjoin('officer','activity.officer_id','=','officer.id')
             ->leftjoin('visitor','activity.visitor_id','=','visitor.id')

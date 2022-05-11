@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Visitor;
+use App\Models\Activity;
 
 class VisitorController extends Controller
 {
@@ -51,12 +52,27 @@ class VisitorController extends Controller
 
     public function toggleStatus(Request $request) {
 
-        if($request->status == "Active" || $request->status == "Inactive") {
+        if($request->status == "Active") {
             $obj = Visitor::findOrFail($request->id);
 
             $obj->vstatus = ($request->status == "Active") ? "Inactive": "Active";
             $obj->save();
+
+            Activity::where('visitor_id', '=', $request->id)->update([
+                'astatus' => 'Deactivated'
+            ]);
+
             return response()->json(['success' => 'Toggled successfully']);   
+        } else if($request->status == "Inactive") {
+            $obj = Visitor::findOrFail($request->id);
+
+            $obj->vstatus = ($request->status == "Active") ? "Inactive": "Active";
+            $obj->save();
+
+            Activity::where('visitor_id', '=', $request->id)->update([
+                'astatus' => 'Active'
+            ]);
+            return response()->json(['success' => 'Toggled successfully']);
         }
         return null;     
     }
