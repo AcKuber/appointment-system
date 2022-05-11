@@ -149,6 +149,22 @@
 		</div>
 	</div>
 
+	<div>
+		<h2 class="text-lg text-center mt-5 font-bold">Filters:</h2>
+		<form action="#" method="POST" id="search_form">
+			@csrf
+			<div class="mx-3">
+				<label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activity Type:</label>
+				<select name="activity_type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<option selected disabled>Select Type</option>
+						<option value="Leave">Leave</option>
+						<option value="Appointment">Appointment</option>
+						<option value="Break">Break</option>
+					</select>
+				</div>
+		</form>
+
+	</div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
 	<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

@@ -18,6 +18,7 @@
         case 'activity':
           APPOINTMENT.activity.insertActivity();
           APPOINTMENT.activity.fetchActivity();
+          APPOINTMENT.activity.filterBasedOnType();
         break;
         default:
           // nothing

@@ -51,4 +51,6 @@ Route::get('/activity', [ActivityController::class, 'index'])->name('activity_in
 
 Route::post('/activity', [ActivityController::class, 'store'])->name('activity_insert');
 
-Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name('activity_index');
+Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name('activity_fetch');
+
+Route::get('/filterBasedOnType', [ActivityController::class, 'filterBasedOnType'])->name('activity_filter_based_on_type');

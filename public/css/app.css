@@ -910,6 +910,9 @@ input:checked + .toggle-bg {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.mt-5 {
+  margin-top: 1.25rem;
+}
 .block {
   display: block;
 }
@@ -972,6 +975,12 @@ input:checked + .toggle-bg {
 }
 .w-4 {
   width: 1rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-40 {
+  width: 10rem;
 }
 .max-w-md {
   max-width: 28rem;
@@ -1215,11 +1224,18 @@ input:checked + .toggle-bg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .font-medium {
   font-weight: 500;
 }
 .font-semibold {
   font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
 }
 .leading-6 {
   line-height: 1.5rem;
