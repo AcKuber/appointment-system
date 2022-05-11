@@ -151,7 +151,7 @@
 
 	<div>
 		<h2 class="text-lg text-center mt-5 font-bold">Filters:</h2>
-		<form action="#" method="POST" id="search_form">
+		<form action="#" method="POST" id="search_form" class="flex">
 			@csrf
 			<div class="mx-3">
 				<label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activity Type:</label>
@@ -161,6 +161,17 @@
 						<option value="Leave">Leave</option>
 						<option value="Appointment">Appointment</option>
 						<option value="Break">Break</option>
+					</select>
+				</div>
+
+				<div class="mx-3">
+				<label for="filter_status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activity Status:</label>
+				<select name="filter_status" id="filter_status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<option selected disabled>Select Type</option>
+						<option value="all">All</option>
+						<option value="Active">Active</option>
+						<option value="Deactivated">Deactivated</option>
+						<option value="Cancelled">Cancelled</option>
 					</select>
 				</div>
 		</form>

@@ -19,6 +19,7 @@
           APPOINTMENT.activity.insertActivity();
           APPOINTMENT.activity.fetchActivity();
           APPOINTMENT.activity.filterBasedOnType();
+          APPOINTMENT.activity.filterBasedOnStatus();
         break;
         default:
           // nothing

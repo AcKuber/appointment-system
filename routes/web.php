@@ -54,3 +54,5 @@ Route::post('/activity', [ActivityController::class, 'store'])->name('activity_i
 Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name('activity_fetch');
 
 Route::get('/filterBasedOnType', [ActivityController::class, 'filterBasedOnType'])->name('activity_filter_based_on_type');
+
+Route::get('/filterBasedOnStatus', [ActivityController::class, 'filterBasedOnStatus'])->name('activity_filter_based_on_status');

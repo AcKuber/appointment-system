@@ -295,5 +295,34 @@ class ActivityController extends Controller
             'activity' => $activity
         ]);   
     }
+
+    public function filterBasedOnStatus(Request $request) {
+
+        if($request->status === "all") {
+            $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
+            ->leftjoin('officer','activity.officer_id','=','officer.id')
+            ->leftjoin('visitor','activity.visitor_id','=','visitor.id')
+            ->orderBy('adate', 'DESC')
+            ->get()->all();
+
+         
+            return response()->json([
+                'activity' => $activity
+            ]);   
+        }
+
+
+        $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
+            ->leftjoin('officer','activity.officer_id','=','officer.id')
+            ->leftjoin('visitor','activity.visitor_id','=','visitor.id')
+            ->where('astatus', '=', $request->status)
+            ->orderBy('adate', 'DESC')
+            ->get()->all();
+
+         
+        return response()->json([
+            'activity' => $activity
+        ]);   
+    }
 }
 
