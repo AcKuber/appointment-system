@@ -366,3 +366,66 @@ APPOINTMENT.activity.filterBasedOnDate = function() {
 
     });
 }
+
+APPOINTMENT.activity.filterBasedOnTime = function() {
+    $('#filter_time_btn').on('click', function(event) {
+        event.preventDefault();
+
+        const startTime = $('#start_time_filter').val();
+        const endTime = $('#end_time_filter').val();
+        let token = $("#date_time_range > input[type='hidden']").val();
+
+
+    if(startTime !== '' && endTime !== '') {
+            
+        $.ajax({
+        type: 'GET',
+        url: '/filterBasedOnTimeRange',
+        data: {
+            _token: token,
+            start_time: startTime,
+            end_time: endTime
+        },
+
+
+        success: function(data, status, xhr) {
+            $('#activity_data').html("");
+
+                if(data.activity.length === 0)
+                    $('#activity_data').html("<h1 class='text-2xl font-bold text-center'>No data available.</h1>");
+
+                $.each(data.activity, function(key, value){
+
+                    var d = "<tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>"
+                        + "<td class='px-6 py-4'>"
+                        +value.aname + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.atype + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.oname + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.vname + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.astatus + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.adate + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.startTime + "</td>"
+                        + "<td class='px-6 py-4'>"
+                        + value.endTime +"</td>"
+                        + "<td>"
+                        + "<button class='m-2 p-2 bg-blue-500 text-white rounded'>Update</button>"
+                        + "<button class='m-2 p-2 bg-red-500 text-white rounded'>Cancel</button>"
+                        + "</tr>";
+                     $('#activity_data').append(d); 
+                });
+            },
+
+            error: function(request, error) {
+            }
+        });     
+
+       }
+
+    });
+}

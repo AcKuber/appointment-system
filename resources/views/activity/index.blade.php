@@ -213,14 +213,14 @@
 
 				<div class="flex mx-3">
 					<div>
-						<label for="start_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Time</label>
-						<input type="time" name="start_time" id="start_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<label for="start_time_filter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Time</label>
+						<input type="time" name="start_time_filter" id="start_time_filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 					</div>
 					<div class="mx-3">
-						<label for="end_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">End Time</label>
-						<input type="time" name="end_time" id="end_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<label for="end_time_filter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">End Time</label>
+						<input type="time" name="end_time_filter" id="end_time_filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 					</div>
-					<button class="bg-blue-500 text-white rounded self-center p-2 mt-8 hover:bg-blue-600">Filter</button>
+					<button class="bg-blue-500 text-white rounded self-center p-2 mt-8 hover:bg-blue-600" id="filter_time_btn">Filter</button>
 				</div>
 		</form>
 	</div>

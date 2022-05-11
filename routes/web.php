@@ -63,3 +63,7 @@ Route::get('/filterBasedOnVisitor', [ActivityController::class, 'filterBasedOnVi
 
 Route::get('/filterBasedOnDateRange', [ActivityController::class, 'filterBasedOnDateRange'])->name('activity_filter_based_on_date');
 
+Route::get('/filterBasedOnTimeRange', [ActivityController::class, 'filterBasedOnTimeRange'])->name('activity_filter_based_on_time');
+
+
+
