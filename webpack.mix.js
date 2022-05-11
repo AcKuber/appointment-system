@@ -15,6 +15,7 @@ mix.js([
     'resources/js/app.js',
     'resources/js/officer.js',
     'resources/js/visitor.js',
+    'resources/js/activity.js',
     'resources/js/init.js'
     ],'public/js')
     .postCss('resources/css/app.css', 'public/css', [

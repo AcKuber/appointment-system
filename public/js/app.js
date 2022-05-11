@@ -1,6 +1,50 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./resources/js/activity.js":
+/*!**********************************!*\
+  !*** ./resources/js/activity.js ***!
+  \**********************************/
+/***/ (() => {
+
+APPOINTMENT.activity.insertActivity = function () {
+  $('#add_activity_form').on('submit', function (event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    $("#add_activity_form > div > small").text("");
+    $("#add_activity_form > div > small").addClass('hidden');
+    $("#add_activity_form > div > div > small").text("");
+    $("#add_activity_form > div > div > small").addClass('hidden');
+    $.ajax({
+      type: 'POST',
+      url: '/activity',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(data) {
+        if (data.status === 'error') {
+          $.each(data.errors, function (key, value) {
+            $("#add_activity_form > div > small[name=" + key + "]").text(value);
+            $("#add_activity_form > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+
+            if (key === 'activity_date' || key === 'start_time' || key === 'end_time') {
+              $("#add_activity_form > div > div > small[name=" + key + "]").text(value);
+              $("#add_activity_form > div > div > small[name=" + key + "]").addClass('text-red-500').removeClass('hidden');
+            }
+          });
+        } else {
+          alert(data.success); //location.reload();
+        }
+      },
+      error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
+      }
+    });
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -14,7 +58,8 @@
   window.APPOINTMENT = {
     global: {},
     officer: {},
-    visitor: {}
+    visitor: {},
+    activity: {}
   };
 })();
 
@@ -42,6 +87,10 @@
         APPOINTMENT.visitor.insertVisitorDetail();
         APPOINTMENT.visitor.toggleVisitorStatus();
         APPOINTMENT.visitor.editVisitor();
+        break;
+
+      case 'activity':
+        APPOINTMENT.activity.insertActivity();
         break;
 
       default: // nothing
@@ -11376,6 +11425,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/officer.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/visitor.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/activity.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/init.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))

@@ -9,6 +9,7 @@
 	window.APPOINTMENT = {
 		global:{},
 		officer: {},
-		visitor: {}
+		visitor: {},
+		activity: {}
 	};
 })();

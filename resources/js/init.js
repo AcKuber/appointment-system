@@ -15,6 +15,9 @@
           APPOINTMENT.visitor.toggleVisitorStatus();
           APPOINTMENT.visitor.editVisitor();
         break;
+        case 'activity':
+          APPOINTMENT.activity.insertActivity();
+        break;
         default:
           // nothing
       }

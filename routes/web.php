@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ActivityController;
 
 
 Route::get('/', function () {
@@ -43,3 +44,9 @@ Route::post('/editVisitor', [VisitorController::class, 'edit'])->name('update_vi
 Route::post('/getVisitorDetailByID', [VisitorController::class, 'getDetail'])->name('visitor_detail');
 
 Route::post('/toggleVisitorStatus', [VisitorController::class, 'toggleStatus'])->name('toggle_visitor_status');
+
+
+// activity related routes 
+Route::get('/activity', [ActivityController::class, 'index'])->name('activity_index');
+
+Route::post('/activity', [ActivityController::class, 'store'])->name('activity_insert');
