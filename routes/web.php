@@ -50,3 +50,5 @@ Route::post('/toggleVisitorStatus', [VisitorController::class, 'toggleStatus'])-
 Route::get('/activity', [ActivityController::class, 'index'])->name('activity_index');
 
 Route::post('/activity', [ActivityController::class, 'store'])->name('activity_insert');
+
+Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name('activity_index');

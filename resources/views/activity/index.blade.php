@@ -150,6 +150,29 @@
 	</div>
 
 
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+	<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+		<thead>
+			<tr>
+				<th scope="col" class="px-6 py-3">Activity Name</th>
+				<th scope="col" class="px-6 py-3">Activity Type</th>
+				<th scope="col" class="px-6 py-3">Officer Name</th>
+				<th scope="col" class="px-6 py-3">Visitor Name</th>
+				<th scope="col" class="px-6 py-3">Activity Status</th>
+				<th scope="col" class="px-6 py-3">Activity Date</th>
+				<th scope="col" class="px-6 py-3">Start Time</th>
+				<th scope="col" class="px-6 py-3">End Time</th>
+				<th scope="col" class="px-6 py-3">Action</th>
+
+			</tr>
+		</thead>
+
+		<tbody id="activity_data">
+		
+		</tbody>
+	</table>
+</div>
+
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/flowbite.js') }}"></script>

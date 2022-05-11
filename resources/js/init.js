@@ -17,6 +17,7 @@
         break;
         case 'activity':
           APPOINTMENT.activity.insertActivity();
+          APPOINTMENT.activity.fetchActivity();
         break;
         default:
           // nothing

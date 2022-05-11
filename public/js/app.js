@@ -34,12 +34,27 @@ APPOINTMENT.activity.insertActivity = function () {
             }
           });
         } else {
-          alert(data.success); //location.reload();
+          alert(data.success);
+          location.reload();
         }
       },
       error: function error(request, _error) {//let errors = jQuery.parseJSON(request.responseText);
       }
     });
+  });
+};
+
+APPOINTMENT.activity.fetchActivity = function () {
+  $.ajax({
+    type: 'GET',
+    url: '/fetchActivity',
+    success: function success(data, status, xhr) {
+      $.each(data.activity, function (key, value) {
+        var d = "<tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>" + "<td class='px-6 py-4'>" + value.aname + "</td>" + "<td class='px-6 py-4'>" + value.atype + "</td>" + "<td class='px-6 py-4'>" + value.oname + "</td>" + "<td class='px-6 py-4'>" + value.vname + "</td>" + "<td class='px-6 py-4'>" + value.astatus + "</td>" + "<td class='px-6 py-4'>" + value.adate + "</td>" + "<td class='px-6 py-4'>" + value.startTime + "</td>" + "<td class='px-6 py-4'>" + value.endTime + "</td>" + "<td>" + "<button class='m-2 p-2 bg-blue-500 text-white rounded'>Update</button>" + "<button class='m-2 p-2 bg-red-500 text-white rounded'>Cancel</button>" + "</tr>";
+        $('#activity_data').append(d);
+      });
+    },
+    error: function error(request, _error2) {}
   });
 };
 
@@ -91,6 +106,7 @@ APPOINTMENT.activity.insertActivity = function () {
 
       case 'activity':
         APPOINTMENT.activity.insertActivity();
+        APPOINTMENT.activity.fetchActivity();
         break;
 
       default: // nothing
