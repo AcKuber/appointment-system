@@ -56,3 +56,7 @@ Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name
 Route::get('/filterBasedOnType', [ActivityController::class, 'filterBasedOnType'])->name('activity_filter_based_on_type');
 
 Route::get('/filterBasedOnStatus', [ActivityController::class, 'filterBasedOnStatus'])->name('activity_filter_based_on_status');
+
+Route::get('/filterBasedOnOfficer', [ActivityController::class, 'filterBasedOnOfficer'])->name('activity_filter_based_on_officer');
+
+

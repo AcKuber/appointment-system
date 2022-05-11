@@ -174,6 +174,16 @@
 						<option value="Cancelled">Cancelled</option>
 					</select>
 				</div>
+
+				<div>
+					<label for="filter_officer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Officer Name</label>
+					<select name="filter_officer" id="filter_officer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<option selected disabled>Select Officer</option>
+						@foreach($officer as $value) 
+							<option value="{{ $value->id }}">{{ $value->oname}}</option>
+						@endforeach
+					</select>
+				</div>
 		</form>
 
 	</div>
