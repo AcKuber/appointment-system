@@ -184,6 +184,17 @@
 						@endforeach
 					</select>
 				</div>
+
+				<div class="mx-3">
+					<label for="filter_visitor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Visitor Name</label>
+					<select name="filter_visitor" id="filter_visitor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+						<option selected disabled>Select Visitor</option>
+						@foreach($visitor as $value) 
+							<option value="{{ $value->id }}">{{ $value->vname}}</option>
+						@endforeach
+					</select>
+					<small name="visitor_name" class="bottom-0 left-0 hidden"></small>
+				</div>
 		</form>
 
 	</div>

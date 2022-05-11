@@ -20,7 +20,8 @@
           APPOINTMENT.activity.fetchActivity();
           APPOINTMENT.activity.filterBasedOnType();
           APPOINTMENT.activity.filterBasedOnStatus();
-          APPOINTMENT.activity.filterBasedOnStatus();
+          APPOINTMENT.activity.filterBasedOnOfficer();
+          APPOINTMENT.activity.filterBasedOnVisitor();
         break;
         default:
           // nothing

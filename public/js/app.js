@@ -106,7 +106,7 @@ APPOINTMENT.activity.filterBasedOnStatus = function () {
   });
 };
 
-APPOINTMENT.activity.filterBasedOnStatus = function () {
+APPOINTMENT.activity.filterBasedOnOfficer = function () {
   $('#filter_officer').on('change', function (event) {
     var officerID = $(this).val();
     var token = $("#search_form > input[type='hidden']").val();
@@ -126,6 +126,30 @@ APPOINTMENT.activity.filterBasedOnStatus = function () {
         });
       },
       error: function error(request, _error5) {}
+    });
+  });
+};
+
+APPOINTMENT.activity.filterBasedOnVisitor = function () {
+  $('#filter_visitor').on('change', function (event) {
+    var visitorID = $(this).val();
+    var token = $("#search_form > input[type='hidden']").val();
+    $.ajax({
+      type: 'GET',
+      url: '/filterBasedOnVisitor',
+      data: {
+        _token: token,
+        id: visitorID
+      },
+      success: function success(data, status, xhr) {
+        $('#activity_data').html("");
+        if (data.activity.length === 0) $('#activity_data').html("<h1 class='text-2xl font-bold text-center'>No data available.</h1>");
+        $.each(data.activity, function (key, value) {
+          var d = "<tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>" + "<td class='px-6 py-4'>" + value.aname + "</td>" + "<td class='px-6 py-4'>" + value.atype + "</td>" + "<td class='px-6 py-4'>" + value.oname + "</td>" + "<td class='px-6 py-4'>" + value.vname + "</td>" + "<td class='px-6 py-4'>" + value.astatus + "</td>" + "<td class='px-6 py-4'>" + value.adate + "</td>" + "<td class='px-6 py-4'>" + value.startTime + "</td>" + "<td class='px-6 py-4'>" + value.endTime + "</td>" + "<td>" + "<button class='m-2 p-2 bg-blue-500 text-white rounded'>Update</button>" + "<button class='m-2 p-2 bg-red-500 text-white rounded'>Cancel</button>" + "</tr>";
+          $('#activity_data').append(d);
+        });
+      },
+      error: function error(request, _error6) {}
     });
   });
 };
@@ -181,7 +205,8 @@ APPOINTMENT.activity.filterBasedOnStatus = function () {
         APPOINTMENT.activity.fetchActivity();
         APPOINTMENT.activity.filterBasedOnType();
         APPOINTMENT.activity.filterBasedOnStatus();
-        APPOINTMENT.activity.filterBasedOnStatus();
+        APPOINTMENT.activity.filterBasedOnOfficer();
+        APPOINTMENT.activity.filterBasedOnVisitor();
         break;
 
       default: // nothing

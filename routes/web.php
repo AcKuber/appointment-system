@@ -59,4 +59,6 @@ Route::get('/filterBasedOnStatus', [ActivityController::class, 'filterBasedOnSta
 
 Route::get('/filterBasedOnOfficer', [ActivityController::class, 'filterBasedOnOfficer'])->name('activity_filter_based_on_officer');
 
+Route::get('/filterBasedOnVisitor', [ActivityController::class, 'filterBasedOnVisitor'])->name('activity_filter_based_on_visitor');
+
 
