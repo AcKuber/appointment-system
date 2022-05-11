@@ -195,8 +195,34 @@
 					</select>
 					<small name="visitor_name" class="bottom-0 left-0 hidden"></small>
 				</div>
+				
 		</form>
+		<form action="#" id="date_time_range" class="flex mt-3">
+			@csrf
+			<div class="flex mx-3">
+					<div>
+						<label for="start_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
+						<input type="date" name="start_date" id="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+					</div>
+					<div class="mx-3">
+						<label for="end_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">End Date</label>
+						<input type="date" name="end_date" id="end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+					</div>
+					<button class="bg-blue-500 text-white rounded self-center p-2 mt-8 hover:bg-blue-600" id="filter_date_btn">Filter</button>
+				</div>
 
+				<div class="flex mx-3">
+					<div>
+						<label for="start_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Time</label>
+						<input type="time" name="start_time" id="start_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+					</div>
+					<div class="mx-3">
+						<label for="end_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">End Time</label>
+						<input type="time" name="end_time" id="end_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+					</div>
+					<button class="bg-blue-500 text-white rounded self-center p-2 mt-8 hover:bg-blue-600">Filter</button>
+				</div>
+		</form>
 	</div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">

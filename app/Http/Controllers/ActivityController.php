@@ -382,5 +382,21 @@ class ActivityController extends Controller
             'activity' => $activity
         ]);   
     }
+
+    public function filterBasedOnDateRange(Request $request) {
+
+
+        $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
+            ->leftjoin('officer','activity.officer_id','=','officer.id')
+            ->leftjoin('visitor','activity.visitor_id','=','visitor.id')
+            ->whereBetween('adate', [$request->start_date, $request->end_date])
+            ->orderBy('adate', 'DESC')
+            ->get()->all();
+
+         
+        return response()->json([
+            'activity' => $activity
+        ]);   
+    }
 }
 

@@ -22,6 +22,7 @@
           APPOINTMENT.activity.filterBasedOnStatus();
           APPOINTMENT.activity.filterBasedOnOfficer();
           APPOINTMENT.activity.filterBasedOnVisitor();
+          APPOINTMENT.activity.filterBasedOnDate();
         break;
         default:
           // nothing
