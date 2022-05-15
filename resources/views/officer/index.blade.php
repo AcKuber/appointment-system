@@ -213,7 +213,7 @@
 						>
 						UPDATE
 					</button>
-						<button class="m-2 p-2 bg-yellow-400 text-white rounded">Appointments</button>
+						<a class="m-2 p-2 bg-yellow-400 text-white rounded view_appointment_btn" href="/viewOfficerAppointment?id={{ $value->id }} && _token={{ csrf_token() }}">Appointments</a>
 					</td>
 				</tr>
 				@php

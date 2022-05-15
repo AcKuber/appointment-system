@@ -33,6 +33,9 @@ Route::post('/getOfficerDetailByID', [OfficerController::class, 'getDetail'])->n
 
 Route::post('/toggleOfficerStatus', [OfficerController::class, 'toggleStatus'])->name('toggle_officer_status');
 
+Route::get('/viewOfficerAppointment', [OfficerController::class, 'viewAppointment'])->name('officer_view_appointment');
+
+
 
 
 // visitor related routes
@@ -45,11 +48,16 @@ Route::post('/getVisitorDetailByID', [VisitorController::class, 'getDetail'])->n
 
 Route::post('/toggleVisitorStatus', [VisitorController::class, 'toggleStatus'])->name('toggle_visitor_status');
 
+Route::get('/viewVisitorAppointment', [VisitorController::class, 'viewAppointment'])->name('visitor_view_appointment');
+
+
 
 // activity related routes 
 Route::get('/activity', [ActivityController::class, 'index'])->name('activity_index');
 
 Route::post('/activity', [ActivityController::class, 'store'])->name('activity_insert');
+
+Route::post('/editActivity', [ActivityController::class, 'edit'])->name('activity_edit');
 
 Route::get('/fetchActivity', [ActivityController::class, 'fetchActivity'])->name('activity_fetch');
 
@@ -65,5 +73,8 @@ Route::get('/filterBasedOnDateRange', [ActivityController::class, 'filterBasedOn
 
 Route::get('/filterBasedOnTimeRange', [ActivityController::class, 'filterBasedOnTimeRange'])->name('activity_filter_based_on_time');
 
+Route::post('/fetchActivityBasedOnID', [ActivityController::class, 'fetchActivityBasedOnID'])->name('activity_fetch_based_on_id');
+
+Route::post('/cancelActivity', [ActivityController::class, 'cancelActivity'])->name('cancel_activity');
 
 

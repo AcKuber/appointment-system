@@ -24,6 +24,9 @@
           APPOINTMENT.activity.filterBasedOnVisitor();
           APPOINTMENT.activity.filterBasedOnDate();
           APPOINTMENT.activity.filterBasedOnTime();
+          APPOINTMENT.activity.fetchActivityBasedOnID();
+          APPOINTMENT.activity.editActivity();
+          APPOINTMENT.activity.cancelActivity();
         break;
         default:
           // nothing

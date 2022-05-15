@@ -15,6 +15,19 @@ class VisitorController extends Controller
         ]);
     }
 
+     public function viewAppointment(Request $request) {
+        $activity = Activity::select('aname', 'atype', 'astatus', 'adate', 'startTime', 'endTime', 'oname', 'vname')
+            ->leftjoin('officer','activity.officer_id','=','officer.id')
+            ->leftjoin('visitor','activity.visitor_id','=','visitor.id')
+            ->whereRaw('visitor_id = ? AND atype = ?', [$request->id, 'Appointment'])
+            ->orderBy('adate', 'DESC')
+            ->get()->all();
+
+            return view('visitor.view_appointment', [
+            'data' => $activity
+        ]);
+    }
+
     public function store(Request $request) {
         $validator = \Validator::make($request->all(), [
             'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],

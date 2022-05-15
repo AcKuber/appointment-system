@@ -51,6 +51,8 @@ APPOINTMENT.officer.insertOfficerDetail = function() {
 
 
 
+
+
 APPOINTMENT.officer.toggleOfficerStatus = function() {
     $('.toggler').on('click', function(event) {
         const id = $(this).data('id');
