@@ -8,7 +8,7 @@
 ## About The Project
 
 
-TThis is online appointment system which allows user to book appointment with any officer. It contains three entity Officer, Visitor and Activity.
+This is online appointment system which allows user to book appointment with any officer. It contains three entity Officer, Visitor and Activity.
 
 
 
